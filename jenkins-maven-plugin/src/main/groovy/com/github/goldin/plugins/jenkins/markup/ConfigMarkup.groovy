@@ -72,7 +72,7 @@ class ConfigMarkup extends Markup
             add( "<!-- Generated automatically by [${ job.generationPom }]${ timestamp } -->\n" )
             add( '<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->\n' )
 
-            "${ isMavenJob ? 'maven2-moduleset' : 'project' }" {
+            "${ isMavenJob ? 'maven2-moduleset' :  job.jobTypeValue   }" {
                 actions()
                 addDescription()
                 if ( job.displayName ){ displayName( job.displayName ) }

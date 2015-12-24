@@ -153,6 +153,8 @@ class Job
     String               authToken
     PostStepResult       runPostStepsIfResult
 
+	String               jobTypeValue 
+ 	
     Groovy[]             groovys
     Groovy               groovy
     List<Groovy>         groovys(){ generalBean().list( groovys, groovy )}
@@ -347,7 +349,7 @@ class Job
 
         setMany( split( '|authToken|scm|buildWrappers|properties|publishers|quietPeriod|scmCheckoutRetryCount|gitHubUrl' +
                         '|useUpdate|doRevert|blockBuildWhenDownstreamBuilding|blockBuildWhenUpstreamBuilding|appendTasks|daysToKeep' +
-                        '|numToKeep|artifactDaysToKeep|artifactNumToKeep', '|' ),
+                        '|numToKeep|artifactDaysToKeep|artifactNumToKeep|jobTypeValue', '|' ),
                  parentJob, override )
 
         //noinspection GroovyConditionalCanBeElvis
@@ -389,6 +391,8 @@ class Job
         if ( jobType == JobType.free )
         {
             setJobTasks( 'tasks', parentJob, override )
+            set( 'jobTypeValue',                    parentJob, override, 'project',           { String s         -> assert s } )
+           
         }
 
         if ( jobType == JobType.maven )
